@@ -49,3 +49,19 @@ class AddUserLoadingStateState extends AppSataes {}
 class PickImageSuccessState extends AppSataes {}
 
 class PickImageErrorState extends AppSataes {}
+
+class PickOperationsVideoSuccessState extends AppSataes {}
+
+class ClearVideoSuccessState extends AppSataes {}
+
+class ClearVoiceSuccessState extends AppSataes {}
+
+class UploadConditionVideoSuccessState extends AppSataes {}
+
+class UploadConditionVideoLoadingState extends AppSataes {}
+
+class PickOperationsVoiceSuccessState extends AppSataes {}
+
+class UploadConditionVoiceSuccessState extends AppSataes {}
+
+class UploadConditionVoiceLoadingState extends AppSataes {}

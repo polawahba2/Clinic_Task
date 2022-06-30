@@ -65,17 +65,14 @@ class BuildClinicNAP extends StatelessWidget {
         Align(
           alignment: AlignmentDirectional.bottomEnd,
           child: TextButton(
-              onPressed: () {
-                AppCubit.getCubit(context).deleteElementFromDataBase(index);
-              },
-              child: const Text(
-                'Delete Record',
-                style: TextStyle(
-                  color: AppColor.red,
-                  decoration: TextDecoration.underline,
-                  fontSize: 13,
-                ),
-              )),
+            onPressed: () {
+              AppCubit.getCubit(context).deleteElementFromDataBase(index);
+            },
+            child: Text(
+              'Delete Record',
+              style: deleteButtonTextStyle(),
+            ),
+          ),
         ),
       ],
     );

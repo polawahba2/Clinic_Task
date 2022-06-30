@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,8 @@ class AppCubit extends Cubit<AppSataes> {
   File? diagnosisImage;
   File? operationImage;
   File? medicationsImage;
+  File? conditionVideo;
+  File? conditionVoice;
   var picker = ImagePicker();
   String? certificationImageUrl;
   String? profileImageUrl;
@@ -35,6 +38,9 @@ class AppCubit extends Cubit<AppSataes> {
   String? diagnosisImageUrl;
   String? operationImageUrl;
   String? medicationsImageUrl;
+  String? conditionVideoUrl;
+  String? conditionVoiceUrl;
+
   TextEditingController fullNameController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
   TextEditingController personalAdressController = TextEditingController();
@@ -54,6 +60,68 @@ class AppCubit extends Cubit<AppSataes> {
     'subSpecialityController': 'Sub-Speciality',
     'scientificDegreeController': 'Scientific Degree 1',
   };
+
+  Future pickConditionVideo() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path;
+    conditionVideo = File(path!);
+    emit(PickOperationsVideoSuccessState());
+  }
+
+  Future pickConditionVoice() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path;
+    conditionVoice = File(path!);
+    emit(PickOperationsVoiceSuccessState());
+  }
+
+  Future<void> uploadConditionVoice() async {
+    emit(UploadConditionVoiceLoadingState());
+    final ref = FirebaseStorage.instance.ref(DateTime.now().toString());
+
+    await ref.putFile(conditionVoice!);
+    conditionVoiceUrl = await ref.getDownloadURL();
+    print(conditionVoiceUrl);
+    emit(UploadConditionVoiceSuccessState());
+
+    showToast(text: 'Condition Voice Uploded Successfully');
+  }
+
+  void clearConditionVideo() {
+    conditionVideo = null;
+    emit(ClearVideoSuccessState());
+  }
+
+  void clearConditionVoice() {
+    conditionVoice = null;
+    emit(ClearVoiceSuccessState());
+  }
+
+  void clearLicensUrl() {
+    licensImage = null;
+    licensImageUrl = null;
+    emit(ClearVoiceSuccessState());
+  }
+
+  void clearCertificationUrl() {
+    certificationImage = null;
+    certificationImageUrl = null;
+    emit(ClearVoiceSuccessState());
+  }
+
+  Future<void> uploadConditionVideo() async {
+    emit(UploadConditionVideoLoadingState());
+    final ref = FirebaseStorage.instance.ref(DateTime.now().toString());
+
+    await ref.putFile(conditionVideo!);
+    conditionVideoUrl = await ref.getDownloadURL();
+    print(conditionVideoUrl);
+    emit(UploadConditionVideoSuccessState());
+    showToast(text: 'Condition Video Uploded Successfully');
+  }
+
   void clearAllControllers() {
     fullNameController.text = '';
     dateOfBirthController.text = '';
@@ -68,6 +136,16 @@ class AppCubit extends Cubit<AppSataes> {
     profileImage = null;
     certificationImage = null;
     licensImage = null;
+    diagnosisImage = null;
+    operationImage = null;
+    medicationsImage = null;
+    conditionVideo = null;
+    conditionVoice = null;
+    diagnosisImageUrl = null;
+    operationImageUrl = null;
+    medicationsImageUrl = null;
+    conditionVideoUrl = null;
+    conditionVoiceUrl = null;
     certificationImageUrl = null;
     profileImageUrl = null;
     licensImageUrl = null;
@@ -306,6 +384,8 @@ class AppCubit extends Cubit<AppSataes> {
     required String scientificDegree,
     required String certification,
     required String licens,
+    required String conditionVideo,
+    required String conditionVoice,
     String diagnosis = '',
     String operations = '',
     String medications = '',
@@ -331,7 +411,8 @@ class AppCubit extends Cubit<AppSataes> {
       'certifications': certification,
       'diagnosis': diagnosis,
       'operations': operations,
-      'medications': medications,
+      'conditionVideo': conditionVideo,
+      'conditionVoice': conditionVoice,
     };
     await docUser.set(json);
     showToast(text: 'User added Successfully');

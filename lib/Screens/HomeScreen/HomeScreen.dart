@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:technical_task/Res/Colors/AppColor.dart';
-import 'package:technical_task/Screens/Scttings/SettingsScreen.dart';
 import 'package:technical_task/Screens/TakeInformationScreen/TakeInformationScreen.dart';
 
 import '../../Cubit/AppCubit/AppCubit.dart';
 import '../../Res/TextStyle/TextStyles.dart';
+import '../Settings/SettingsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

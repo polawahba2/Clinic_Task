@@ -143,7 +143,7 @@ class TakeInformationScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 BuildItemInExpansionTile(
-                                  title: 'Full Name',
+                                  title: LocaleKeys.fullName.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller: myCubit.fullNameController,
@@ -156,7 +156,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Your Id',
+                                  title: LocaleKeys.yourId.tr(),
                                   secoundBart: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                       onChanged: (value) {
@@ -182,7 +182,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Gender',
+                                  title: LocaleKeys.gender.tr(),
                                   secoundBart: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                       onChanged: (value) {
@@ -209,7 +209,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Date Of Birth',
+                                  title: LocaleKeys.dateOfBirth.tr(),
                                   secoundBart: InkWell(
                                     onTap: () async {
                                       try {
@@ -235,7 +235,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Personal Adress ',
+                                  title: LocaleKeys.personalAdress.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller:
@@ -249,7 +249,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'City',
+                                  title: LocaleKeys.city.tr(),
                                   secoundBart: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                       onChanged: (value) {
@@ -275,7 +275,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Region',
+                                  title: LocaleKeys.region.tr(),
                                   secoundBart: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                       onChanged: (value) {
@@ -301,7 +301,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Mobile  ',
+                                  title: LocaleKeys.mobile.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller: myCubit.mobileController,
@@ -315,7 +315,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'E-mail',
+                                  title: LocaleKeys.eMail.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller: myCubit.emailController,
@@ -328,7 +328,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: ' Password',
+                                  title: LocaleKeys.password.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller: myCubit.passwordController,
@@ -342,7 +342,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Confirm Password',
+                                  title: LocaleKeys.confirmPassword.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller:
@@ -369,7 +369,7 @@ class TakeInformationScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 BuildItemInExpansionTile(
-                                  title: 'Main Speciality',
+                                  title: LocaleKeys.mainSpeciality.tr(),
                                   secoundBart: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                       onChanged: (value) {
@@ -395,7 +395,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Sub-Speciality',
+                                  title: LocaleKeys.subSpeciality.tr(),
                                   secoundBart: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                       onChanged: (value) {
@@ -421,7 +421,7 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Scientific Degree',
+                                  title: LocaleKeys.scientificDegree.tr(),
                                   secoundBart: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                       onChanged: (value) {
@@ -474,21 +474,21 @@ class TakeInformationScreen extends StatelessWidget {
 
                                 //Clinc NAP Text Fileds
                                 BuildItemInExpansionTile(
-                                  title: 'Clinic Name',
+                                  title: LocaleKeys.clinicName.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller: myCubit.clinicNameController,
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: 'Clinic Adress',
+                                  title: LocaleKeys.clinicAdress.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller: myCubit.clinicAdressController,
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: ' Phone',
+                                  title: LocaleKeys.clinicPhone.tr(),
                                   secoundBart: TextFormField(
                                     decoration: textFormFieldInputDecoration(),
                                     controller: myCubit.clinicPhoneController,
@@ -539,14 +539,13 @@ class TakeInformationScreen extends StatelessWidget {
                                             Icons.add_circle_rounded,
                                             color: AppColor.lightGreen,
                                           ),
-                                          Text('Add'),
                                         ],
                                       ),
                                     ),
                                   ),
                                 ),
                                 BuildItemInExpansionTile(
-                                  title: ' Upload Certificatoin',
+                                  title: LocaleKeys.uploadCertifications.tr(),
                                   secoundBart: InkWell(
                                     onTap: () {
                                       myCubit.pickCertificationImage();
@@ -561,7 +560,7 @@ class TakeInformationScreen extends StatelessWidget {
                                         children: [
                                           const Icon(Icons.upload),
                                           Text(
-                                            'Upload a Photo',
+                                            LocaleKeys.addPhoto.tr(),
                                             style:
                                                 textFormFieldStyleWithDarkGreen(),
                                           ),
@@ -571,8 +570,23 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                   needElivation: false,
                                 ),
+                                if (myCubit.certificationImage != null)
+                                  Text("${myCubit.certificationImage}"),
+                                if (myCubit.certificationImage != null)
+                                  Align(
+                                    alignment: AlignmentDirectional.topEnd,
+                                    child: InkWell(
+                                      onTap: () {
+                                        myCubit.clearCertificationUrl();
+                                      },
+                                      child: Text(
+                                        'Cancel',
+                                        style: deleteButtonTextStyle(),
+                                      ),
+                                    ),
+                                  ),
                                 BuildItemInExpansionTile(
-                                  title: ' Upload Licens',
+                                  title: LocaleKeys.uploadLicens.tr(),
                                   secoundBart: InkWell(
                                     onTap: () {
                                       myCubit.picklicensImage();
@@ -587,7 +601,7 @@ class TakeInformationScreen extends StatelessWidget {
                                         children: [
                                           const Icon(Icons.upload),
                                           Text(
-                                            'Upload a Photo',
+                                            LocaleKeys.addPhoto.tr(),
                                             style:
                                                 textFormFieldStyleWithDarkGreen(),
                                           ),
@@ -597,6 +611,21 @@ class TakeInformationScreen extends StatelessWidget {
                                   ),
                                   needElivation: false,
                                 ),
+                                if (myCubit.licensImage != null)
+                                  Text("${myCubit.licensImage}"),
+                                if (myCubit.licensImage != null)
+                                  Align(
+                                    alignment: AlignmentDirectional.topEnd,
+                                    child: InkWell(
+                                      onTap: () {
+                                        myCubit.clearLicensUrl();
+                                      },
+                                      child: Text(
+                                        'Cancel',
+                                        style: deleteButtonTextStyle(),
+                                      ),
+                                    ),
+                                  ),
                               ],
                             ),
                           ))
@@ -613,59 +642,116 @@ class TakeInformationScreen extends StatelessWidget {
                                   onTap: () {
                                     myCubit.pickDiagnosisImage();
                                   },
-                                  child: const BuildItemInMedicalInfo(
-                                    title: 'Please add diagnosis if any',
+                                  child: BuildItemInMedicalInfo(
+                                    title: LocaleKeys.diagnosis.tr(),
                                   ),
                                 ),
                                 InkWell(
                                   onTap: () {
                                     myCubit.pickOperationsImage();
                                   },
-                                  child: const BuildItemInMedicalInfo(
-                                    title:
-                                        'Please add previoud operations if any',
+                                  child: BuildItemInMedicalInfo(
+                                    title: LocaleKeys.operation.tr(),
                                   ),
                                 ),
                                 InkWell(
                                   onTap: () {
                                     myCubit.pickMedicationsImage();
                                   },
-                                  child: const BuildItemInMedicalInfo(
-                                    title: 'Please add medications if any',
+                                  child: BuildItemInMedicalInfo(
+                                    title: LocaleKeys.medications.tr(),
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: BuildItemInMedicalInfo(
-                                    title: 'Describe your condition by video',
-                                    secoundWidget: Row(
-                                      children: const [
-                                        Icon(Icons.upload),
-                                        Icon(
+                                BuildItemInMedicalInfo(
+                                  title: LocaleKeys.conditionVideo.tr(),
+                                  secoundWidget: Row(
+                                    children: [
+                                      InkWell(
+                                          onTap: () {
+                                            if (myCubit.conditionVideo !=
+                                                null) {
+                                              myCubit.uploadConditionVideo();
+                                            }
+                                          },
+                                          child: const Icon(Icons.upload)),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          myCubit.pickConditionVideo();
+                                        },
+                                        child: const Icon(
                                           Icons.videocam,
                                           size: 35,
                                           color: AppColor.lightGreen,
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: BuildItemInMedicalInfo(
-                                    title: 'Describe your condition by voice',
-                                    secoundWidget: Row(
-                                      children: const [
-                                        Icon(Icons.upload),
-                                        Icon(
+                                if (myCubit.conditionVideo != null)
+                                  Text("${myCubit.conditionVideo}"),
+                                if (myCubit.conditionVideo != null)
+                                  Align(
+                                    alignment: AlignmentDirectional.topEnd,
+                                    child: InkWell(
+                                      onTap: () {
+                                        myCubit.clearConditionVideo();
+                                      },
+                                      child: Text(
+                                        'Cancel',
+                                        style: deleteButtonTextStyle(),
+                                      ),
+                                    ),
+                                  ),
+                                if (state is UploadConditionVideoLoadingState)
+                                  const LinearProgressIndicator(),
+                                BuildItemInMedicalInfo(
+                                  title: LocaleKeys.conditionVoice.tr(),
+                                  secoundWidget: Row(
+                                    children: [
+                                      InkWell(
+                                          onTap: () {
+                                            if (myCubit.conditionVoice !=
+                                                null) {
+                                              myCubit.uploadConditionVoice();
+                                            }
+                                          },
+                                          child: const Icon(Icons.upload)),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          myCubit.pickConditionVoice();
+                                        },
+                                        child: const Icon(
                                           Icons.mic,
                                           size: 40,
                                           color: AppColor.lightGreen,
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
+                                if (myCubit.conditionVoice != null)
+                                  Text("${myCubit.conditionVoice}"),
+                                if (myCubit.conditionVoice != null)
+                                  Align(
+                                    alignment: AlignmentDirectional.topEnd,
+                                    child: InkWell(
+                                      onTap: () {
+                                        myCubit.clearConditionVoice();
+                                      },
+                                      child: Text(
+                                        'Cancel',
+                                        style: deleteButtonTextStyle(),
+                                      ),
+                                    ),
+                                  ),
+                                if (state is UploadConditionVoiceLoadingState)
+                                  const LinearProgressIndicator(),
                               ],
                             ),
                           ),
@@ -693,42 +779,56 @@ class TakeInformationScreen extends StatelessWidget {
                                     myCubit.certificationImageUrl != null &&
                                     myCubit.licensImageUrl != null &&
                                     myCubit.clinicNAPValues.isNotEmpty) {
-                                  myCubit.createNewUser(
-                                    // profileImage: '${myCubit.profileImageUrl}',
-                                    fullName: myCubit.fullNameController.text,
-                                    yourId: myCubit
-                                        .dropBoxControllers['yourIdController'],
-                                    gender: myCubit
-                                        .dropBoxControllers['genderController'],
-                                    dateOfBirth:
-                                        myCubit.dateOfBirthController.text,
-                                    personalAdress:
-                                        myCubit.personalAdressController.text,
-                                    city: myCubit
-                                        .dropBoxControllers['cityController'],
-                                    region: myCubit
-                                        .dropBoxControllers['regionController'],
-                                    mobile: myCubit.mobileController.text,
-                                    eMail: myCubit.emailController.text,
-                                    mainSpeciality: myCubit.dropBoxControllers[
-                                        'mainSpecialityController'],
-                                    subSpeciality: myCubit.dropBoxControllers[
-                                        'subSpecialityController'],
-                                    scientificDegree:
-                                        myCubit.dropBoxControllers[
-                                            'scientificDegreeController'],
-                                    certification:
-                                        '${myCubit.certificationImageUrl}',
-                                    licens: '${myCubit.licensImageUrl}',
-                                  );
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return const HomeScreen();
-                                      },
-                                    ),
-                                  );
+                                  if (myCubit.conditionVideoUrl != null &&
+                                      myCubit.conditionVoiceUrl != null) {
+                                    myCubit.createNewUser(
+                                      // profileImage: '${myCubit.profileImageUrl}',
+                                      fullName: myCubit.fullNameController.text,
+                                      yourId: myCubit.dropBoxControllers[
+                                          'yourIdController'],
+                                      gender: myCubit.dropBoxControllers[
+                                          'genderController'],
+                                      dateOfBirth:
+                                          myCubit.dateOfBirthController.text,
+                                      personalAdress:
+                                          myCubit.personalAdressController.text,
+                                      city: myCubit
+                                          .dropBoxControllers['cityController'],
+                                      region: myCubit.dropBoxControllers[
+                                          'regionController'],
+                                      mobile: myCubit.mobileController.text,
+                                      eMail: myCubit.emailController.text,
+                                      mainSpeciality:
+                                          myCubit.dropBoxControllers[
+                                              'mainSpecialityController'],
+                                      subSpeciality: myCubit.dropBoxControllers[
+                                          'subSpecialityController'],
+                                      scientificDegree:
+                                          myCubit.dropBoxControllers[
+                                              'scientificDegreeController'],
+                                      certification:
+                                          '${myCubit.certificationImageUrl}',
+                                      licens: '${myCubit.licensImageUrl}',
+                                      conditionVideo:
+                                          '${myCubit.conditionVideoUrl}',
+                                      conditionVoice:
+                                          '${myCubit.conditionVoiceUrl}',
+                                    );
+
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return const HomeScreen();
+                                        },
+                                      ),
+                                    );
+                                  } else {
+                                    showToast(
+                                      text: 'please upload video or voice',
+                                      color: AppColor.red,
+                                    );
+                                  }
                                 } else {
                                   showToast(
                                     text:

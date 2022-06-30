@@ -12,7 +12,7 @@ class ThemeClass {
   static ThemeData darkTheme = ThemeData(
       scaffoldBackgroundColor: Colors.black,
       colorScheme: const ColorScheme.dark(),
-      iconTheme: IconThemeData(color: Colors.white),
+      iconTheme: const IconThemeData(color: Colors.white),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.black,
       ));

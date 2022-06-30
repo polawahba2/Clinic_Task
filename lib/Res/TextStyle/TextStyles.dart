@@ -18,6 +18,13 @@ TextStyle homeScreenTextStyle() => const TextStyle(
       fontSize: 30,
       fontWeight: FontWeight.w800,
     );
+
+TextStyle deleteButtonTextStyle() => const TextStyle(
+      color: AppColor.red,
+      decoration: TextDecoration.underline,
+      fontSize: 13,
+    );
+
 TextStyle settingBackTextStyle() => const TextStyle(
       color: AppColor.white,
       fontSize: 22,

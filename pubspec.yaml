@@ -43,6 +43,8 @@ dependencies:
   cloud_firestore: ^3.1.18
   firebase_storage: ^10.2.18
   fluttertoast: ^8.0.9
+  file_picker: ^3.0.4
+  url_launcher: ^6.1.4
 
 dev_dependencies:
   flutter_test:
