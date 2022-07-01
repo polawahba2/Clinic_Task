@@ -60,8 +60,14 @@ class UploadConditionVideoSuccessState extends AppSataes {}
 
 class UploadConditionVideoLoadingState extends AppSataes {}
 
-class PickOperationsVoiceSuccessState extends AppSataes {}
-
 class UploadConditionVoiceSuccessState extends AppSataes {}
 
 class UploadConditionVoiceLoadingState extends AppSataes {}
+
+class RecordInProgressState extends AppSataes {}
+
+class RecordEndedState extends AppSataes {}
+
+class StartRecordingState extends AppSataes {}
+
+class StopRecordingState extends AppSataes {}

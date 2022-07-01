@@ -45,6 +45,9 @@ dependencies:
   fluttertoast: ^8.0.9
   file_picker: ^3.0.4
   url_launcher: ^6.1.4
+  permission_handler: ^10.0.0
+  flutter_audio_recorder2: ^0.0.2
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:

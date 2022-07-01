@@ -22,11 +22,10 @@ class TakeInformationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var myCubit = AppCubit.getCubit(context);
-
     return BlocConsumer<AppCubit, AppSataes>(
       listener: (context, state) {},
       builder: (context, state) {
+        var myCubit = AppCubit.getCubit(context);
         myCubit.dateOfBirthController.text = '20/8/1998';
         return Scaffold(
           body: Padding(
@@ -579,9 +578,10 @@ class TakeInformationScreen extends StatelessWidget {
                                       onTap: () {
                                         myCubit.clearCertificationUrl();
                                       },
-                                      child: Text(
-                                        'Cancel',
-                                        style: deleteButtonTextStyle(),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: AppColor.red,
+                                        size: 30,
                                       ),
                                     ),
                                   ),
@@ -620,9 +620,10 @@ class TakeInformationScreen extends StatelessWidget {
                                       onTap: () {
                                         myCubit.clearLicensUrl();
                                       },
-                                      child: Text(
-                                        'Cancel',
-                                        style: deleteButtonTextStyle(),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: AppColor.red,
+                                        size: 30,
                                       ),
                                     ),
                                   ),
@@ -699,9 +700,10 @@ class TakeInformationScreen extends StatelessWidget {
                                       onTap: () {
                                         myCubit.clearConditionVideo();
                                       },
-                                      child: Text(
-                                        'Cancel',
-                                        style: deleteButtonTextStyle(),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: AppColor.red,
+                                        size: 30,
                                       ),
                                     ),
                                   ),
@@ -713,8 +715,7 @@ class TakeInformationScreen extends StatelessWidget {
                                     children: [
                                       InkWell(
                                           onTap: () {
-                                            if (myCubit.conditionVoice !=
-                                                null) {
+                                            if (myCubit.recordedFile != null) {
                                               myCubit.uploadConditionVoice();
                                             }
                                           },
@@ -723,30 +724,35 @@ class TakeInformationScreen extends StatelessWidget {
                                         width: 20,
                                       ),
                                       InkWell(
-                                        onTap: () {
-                                          myCubit.pickConditionVoice();
+                                        onTap: () async {
+                                          // myCubit.pickConditionVoice();
+                                          await myCubit.startAndEndRecording();
                                         },
-                                        child: const Icon(
-                                          Icons.mic,
+                                        child: Icon(
+                                          myCubit.buttonIcon,
                                           size: 40,
-                                          color: AppColor.lightGreen,
+                                          color: myCubit.buttonColor,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                if (myCubit.conditionVoice != null)
-                                  Text("${myCubit.conditionVoice}"),
-                                if (myCubit.conditionVoice != null)
+                                if (myCubit.recordedFile != null)
+                                  Text(
+                                      "${myCubit.recordDuration!.inMinutes}:${myCubit.recordDuration!.inSeconds}"),
+                                if (myCubit.recordedFile != null)
+                                  Text("${myCubit.recordPath}"),
+                                if (myCubit.recordedFile != null)
                                   Align(
                                     alignment: AlignmentDirectional.topEnd,
                                     child: InkWell(
                                       onTap: () {
                                         myCubit.clearConditionVoice();
                                       },
-                                      child: Text(
-                                        'Cancel',
-                                        style: deleteButtonTextStyle(),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: AppColor.red,
+                                        size: 30,
                                       ),
                                     ),
                                   ),

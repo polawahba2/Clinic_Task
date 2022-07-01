@@ -29,7 +29,9 @@ Future<void> main() async {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (BuildContext context) => AppCubit()..createDB(),
+                create: (BuildContext context) => AppCubit()
+                  ..createDB()
+                  ..init(),
               ),
             ],
             child: BlocConsumer<AppCubit, AppSataes>(

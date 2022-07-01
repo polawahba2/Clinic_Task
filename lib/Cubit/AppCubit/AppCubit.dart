@@ -1,16 +1,20 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_audio_recorder2/flutter_audio_recorder2.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:technical_task/Res/Colors/AppColor.dart';
 import 'package:technical_task/Res/Consts/Consts.dart';
-import 'package:technical_task/Res/TextStyle/TextStyles.dart';
 import '../../Res/CustomWidgets/ShowToast.dart';
 import 'AppStates.dart';
+import 'dart:io' as io;
+import 'dart:async';
 
 class AppCubit extends Cubit<AppSataes> {
   AppCubit() : super(InitialState());
@@ -60,6 +64,107 @@ class AppCubit extends Cubit<AppSataes> {
     'subSpecialityController': 'Sub-Speciality',
     'scientificDegreeController': 'Scientific Degree 1',
   };
+  bool isRecording = false;
+  IconData buttonIcon = Icons.mic;
+  Color buttonColor = AppColor.lightGreen;
+  String? audioUrl;
+
+  FlutterAudioRecorder2? _recorder;
+  Recording? _current;
+  RecordingStatus _currentStatus = RecordingStatus.Unset;
+  File? recordedFile;
+  Duration? recordDuration;
+  String? recordPath;
+
+  init() async {
+    try {
+      bool hasPermission = await FlutterAudioRecorder2.hasPermissions ?? false;
+
+      if (hasPermission) {
+        String customPath = '/flutter_audio_recorder_';
+        io.Directory appDocDirectory;
+        if (io.Platform.isIOS) {
+          appDocDirectory = await getApplicationDocumentsDirectory();
+        } else {
+          appDocDirectory = (await getExternalStorageDirectory())!;
+        }
+
+        customPath = appDocDirectory.path +
+            customPath +
+            DateTime.now().millisecondsSinceEpoch.toString();
+        _recorder =
+            FlutterAudioRecorder2(customPath, audioFormat: AudioFormat.WAV);
+
+        await _recorder!.initialized;
+        var current = await _recorder!.current(channel: 0);
+
+        _current = current;
+        _currentStatus = current!.status!;
+        emit(StartRecordingState());
+      } else {
+        showToast(text: "You must accept permissions", color: AppColor.red);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  start() async {
+    try {
+      await _recorder!.start();
+      var recording = await _recorder!.current(channel: 0);
+
+      _current = recording;
+      emit(StartRecordingState());
+
+      const tick = Duration(milliseconds: 50);
+      Timer.periodic(tick, (Timer t) async {
+        if (_currentStatus == RecordingStatus.Stopped) {
+          t.cancel();
+        }
+
+        var current = await _recorder!.current(channel: 0);
+
+        _current = current;
+        _currentStatus = _current!.status!;
+        emit(StartRecordingState());
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  stop() async {
+    var result = await _recorder!.stop();
+    print("Stop recording: ${result!.path}");
+    print("Stop recording: ${result.duration}");
+    recordDuration = result.duration;
+    recordPath = result.path;
+
+    recordedFile = File('${result.path}');
+    print("File length: ${await recordedFile!.length()}");
+
+    _current = result;
+    _currentStatus = _current!.status!;
+    emit(StopRecordingState());
+    init();
+  }
+
+  Future<void> startAndEndRecording() async {
+    if (!isRecording) {
+      isRecording = true;
+      buttonIcon = Icons.stop;
+      buttonColor = AppColor.red;
+      start();
+      emit(StartRecordingState());
+    } else {
+      isRecording = false;
+      buttonIcon = Icons.mic;
+      buttonColor = AppColor.lightGreen;
+      stop();
+      emit(StopRecordingState());
+    }
+  }
 
   Future pickConditionVideo() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
@@ -69,19 +174,12 @@ class AppCubit extends Cubit<AppSataes> {
     emit(PickOperationsVideoSuccessState());
   }
 
-  Future pickConditionVoice() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-    if (result == null) return;
-    final path = result.files.single.path;
-    conditionVoice = File(path!);
-    emit(PickOperationsVoiceSuccessState());
-  }
-
   Future<void> uploadConditionVoice() async {
     emit(UploadConditionVoiceLoadingState());
     final ref = FirebaseStorage.instance.ref(DateTime.now().toString());
 
-    await ref.putFile(conditionVoice!);
+    await ref.putFile(recordedFile!);
+
     conditionVoiceUrl = await ref.getDownloadURL();
     print(conditionVoiceUrl);
     emit(UploadConditionVoiceSuccessState());
@@ -95,7 +193,7 @@ class AppCubit extends Cubit<AppSataes> {
   }
 
   void clearConditionVoice() {
-    conditionVoice = null;
+    recordedFile = null;
     emit(ClearVoiceSuccessState());
   }
 
@@ -150,6 +248,9 @@ class AppCubit extends Cubit<AppSataes> {
     profileImageUrl = null;
     licensImageUrl = null;
     clinicNAPValues = [];
+    recordedFile = null;
+    recordDuration = null;
+    recordPath = null;
     emit(ClearAllControllersState());
   }
 
