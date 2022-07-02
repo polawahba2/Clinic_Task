@@ -13,20 +13,26 @@ class BaseExpansionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
-      child: ExpansionTile(
-        title: Text(
-          title,
-          style: TextStyle(),
+    return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 15.0),
+        child: ExpansionTile(
+          title: Text(
+            title,
+          ),
+          backgroundColor: AppColor.lightGreen,
+          collapsedBackgroundColor: AppColor.lightGreen,
+          textColor: AppColor.white,
+          collapsedTextColor: AppColor.white,
+          iconColor: AppColor.white,
+          collapsedIconColor: AppColor.white,
+          children: body,
         ),
-        backgroundColor: AppColor.lightGreen,
-        collapsedBackgroundColor: AppColor.lightGreen,
-        textColor: AppColor.white,
-        collapsedTextColor: AppColor.white,
-        iconColor: AppColor.white,
-        collapsedIconColor: AppColor.white,
-        children: body,
       ),
     );
   }
