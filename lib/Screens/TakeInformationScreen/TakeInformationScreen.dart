@@ -737,9 +737,9 @@ class TakeInformationScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (myCubit.recordedFile != null)
+                                if (myCubit.recordDuration != null)
                                   Text(
-                                      "${myCubit.recordDuration!.inMinutes}:${myCubit.recordDuration!.inSeconds}"),
+                                      "0${myCubit.recordDuration!.inMinutes}:0${myCubit.recordDuration!.inSeconds}"),
                                 if (myCubit.recordedFile != null)
                                   Text("${myCubit.recordPath}"),
                                 if (myCubit.recordedFile != null)

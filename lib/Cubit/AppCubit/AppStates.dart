@@ -71,3 +71,9 @@ class RecordEndedState extends AppSataes {}
 class StartRecordingState extends AppSataes {}
 
 class StopRecordingState extends AppSataes {}
+
+class RecorderInitializedSuccessfulState extends AppSataes {}
+
+class RecordingNowState extends AppSataes {}
+
+class RecorderInitializationLoadingfulState extends AppSataes {}

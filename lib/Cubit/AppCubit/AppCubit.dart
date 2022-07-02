@@ -78,6 +78,7 @@ class AppCubit extends Cubit<AppSataes> {
 
   init() async {
     try {
+      emit(RecorderInitializationLoadingfulState());
       bool hasPermission = await FlutterAudioRecorder2.hasPermissions ?? false;
 
       if (hasPermission) {
@@ -100,7 +101,7 @@ class AppCubit extends Cubit<AppSataes> {
 
         _current = current;
         _currentStatus = current!.status!;
-        emit(StartRecordingState());
+        emit(RecorderInitializedSuccessfulState());
       } else {
         showToast(text: "You must accept permissions", color: AppColor.red);
       }
@@ -110,12 +111,15 @@ class AppCubit extends Cubit<AppSataes> {
   }
 
   start() async {
+    if (_current!.status != RecordingStatus.Initialized) {
+      await init();
+    }
     try {
       await _recorder!.start();
       var recording = await _recorder!.current(channel: 0);
 
       _current = recording;
-      emit(StartRecordingState());
+      emit(RecordingNowState());
 
       const tick = Duration(milliseconds: 50);
       Timer.periodic(tick, (Timer t) async {
@@ -127,7 +131,9 @@ class AppCubit extends Cubit<AppSataes> {
 
         _current = current;
         _currentStatus = _current!.status!;
-        emit(StartRecordingState());
+        recordDuration = _current!.duration;
+
+        emit(RecordingNowState());
       });
     } catch (e) {
       print(e);
@@ -136,18 +142,12 @@ class AppCubit extends Cubit<AppSataes> {
 
   stop() async {
     var result = await _recorder!.stop();
-    print("Stop recording: ${result!.path}");
-    print("Stop recording: ${result.duration}");
-    recordDuration = result.duration;
-    recordPath = result.path;
-
+    // recordDuration = result!.duration;
+    recordPath = result!.path;
     recordedFile = File('${result.path}');
-    print("File length: ${await recordedFile!.length()}");
-
     _current = result;
     _currentStatus = _current!.status!;
     emit(StopRecordingState());
-    init();
   }
 
   Future<void> startAndEndRecording() async {
@@ -156,12 +156,16 @@ class AppCubit extends Cubit<AppSataes> {
       buttonIcon = Icons.stop;
       buttonColor = AppColor.red;
       start();
+      showToast(text: 'Start Recording');
+
       emit(StartRecordingState());
     } else {
       isRecording = false;
       buttonIcon = Icons.mic;
       buttonColor = AppColor.lightGreen;
       stop();
+      showToast(text: 'Record saved');
+
       emit(StopRecordingState());
     }
   }
@@ -194,6 +198,7 @@ class AppCubit extends Cubit<AppSataes> {
 
   void clearConditionVoice() {
     recordedFile = null;
+    recordDuration = null;
     emit(ClearVoiceSuccessState());
   }
 
