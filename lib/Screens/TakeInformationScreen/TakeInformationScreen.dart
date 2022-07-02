@@ -691,9 +691,11 @@ class TakeInformationScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (myCubit.conditionVideo != null)
+                                if (myCubit.conditionVideo != null &&
+                                    !myCubit.isConditionVideoUploaded)
                                   Text("${myCubit.conditionVideo}"),
-                                if (myCubit.conditionVideo != null)
+                                if (myCubit.conditionVideo != null &&
+                                    !myCubit.isConditionVideoUploaded)
                                   Align(
                                     alignment: AlignmentDirectional.topEnd,
                                     child: InkWell(
@@ -737,12 +739,15 @@ class TakeInformationScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (myCubit.recordDuration != null)
+                                if (myCubit.recordDuration != null &&
+                                    !myCubit.isConditionVoiceUploaded)
                                   Text(
                                       "0${myCubit.recordDuration!.inMinutes}:0${myCubit.recordDuration!.inSeconds}"),
-                                if (myCubit.recordedFile != null)
+                                if (myCubit.recordedFile != null &&
+                                    !myCubit.isConditionVoiceUploaded)
                                   Text("${myCubit.recordPath}"),
-                                if (myCubit.recordedFile != null)
+                                if (myCubit.recordedFile != null &&
+                                    !myCubit.isConditionVoiceUploaded)
                                   Align(
                                     alignment: AlignmentDirectional.topEnd,
                                     child: InkWell(

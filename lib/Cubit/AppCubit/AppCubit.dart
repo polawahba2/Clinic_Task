@@ -75,6 +75,8 @@ class AppCubit extends Cubit<AppSataes> {
   File? recordedFile;
   Duration? recordDuration;
   String? recordPath;
+  bool isConditionVideoUploaded = false;
+  bool isConditionVoiceUploaded = false;
 
   init() async {
     try {
@@ -152,6 +154,7 @@ class AppCubit extends Cubit<AppSataes> {
 
   Future<void> startAndEndRecording() async {
     if (!isRecording) {
+      isConditionVoiceUploaded = false;
       isRecording = true;
       buttonIcon = Icons.stop;
       buttonColor = AppColor.red;
@@ -171,6 +174,7 @@ class AppCubit extends Cubit<AppSataes> {
   }
 
   Future pickConditionVideo() async {
+    isConditionVideoUploaded = false;
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
     if (result == null) return;
     final path = result.files.single.path;
@@ -181,11 +185,10 @@ class AppCubit extends Cubit<AppSataes> {
   Future<void> uploadConditionVoice() async {
     emit(UploadConditionVoiceLoadingState());
     final ref = FirebaseStorage.instance.ref(DateTime.now().toString());
-
     await ref.putFile(recordedFile!);
-
     conditionVoiceUrl = await ref.getDownloadURL();
     print(conditionVoiceUrl);
+    isConditionVoiceUploaded = true;
     emit(UploadConditionVoiceSuccessState());
 
     showToast(text: 'Condition Voice Uploded Successfully');
@@ -220,7 +223,7 @@ class AppCubit extends Cubit<AppSataes> {
 
     await ref.putFile(conditionVideo!);
     conditionVideoUrl = await ref.getDownloadURL();
-    print(conditionVideoUrl);
+    isConditionVideoUploaded = true;
     emit(UploadConditionVideoSuccessState());
     showToast(text: 'Condition Video Uploded Successfully');
   }
